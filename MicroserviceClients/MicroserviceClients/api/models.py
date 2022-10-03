@@ -6,7 +6,6 @@ class City(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=100)
 
-
     class Meta:
         verbose_name = 'City'
         verbose_name_plural = 'Cities'
@@ -25,11 +24,12 @@ class Client(models.Model):
     # Relation with hasRoutes: False
     class personAddress(models.Model):
         street = models.CharField(max_length=100)
-        number = models.IntegerField()
+        number = models.IntegerField(default=0)
         # Relation to attribute with hasRoutes: true
         addressCity = models.ForeignKey(City, on_delete=models.CASCADE, blank=True, null=True,)
         # Relation to class outside of microservice
-        rentedBooks = models.IntegerField() 
+    
+    rentedBook = models.CharField(max_length=100, blank=True, null=True,)
 
     class Meta:
         verbose_name = 'Client'
