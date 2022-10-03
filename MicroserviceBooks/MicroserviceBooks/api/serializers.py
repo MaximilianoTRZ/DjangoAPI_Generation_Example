@@ -4,20 +4,19 @@ from rest_framework import serializers
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        #fields = '__all__'
-        fields = ['name','lastName','birthDay']
+        fields = '__all__'
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ['name']
+        fields = '__all__'
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['title','author','summary','genre']
+        fields = '__all__'
 
 class BookInstanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookInstance
-        fields = ['book','status','return_date']
+        fields = '__all__'
