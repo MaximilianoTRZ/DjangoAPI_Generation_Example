@@ -3,13 +3,10 @@ from .serializers import CitySerializer, ClientSerializer
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-# from rest_framework import authentication, permissions
-# from django.contrib.auth.models import User
+import requests
+
 
 class index(APIView):
-
-    # authentication_classes = [authentication.TokenAuthentication]
-    # permission_classes = [permissions.IsAdminUser]
 
     def get(self, request, format=None):
       data = {
@@ -55,3 +52,16 @@ class CityViewSet(viewsets.ModelViewSet):
 class ClientViewSet(viewsets.ModelViewSet):
   queryset = Client.objects.all()
   serializer_class = ClientSerializer
+
+  def retrieve(self, request, pk=None, *args, **kwargs):
+
+    client = Client.objects.get(pk=pk)
+    bookParam = client.rentedBook
+    res = requests.get('http://127.0.0.1:8000/api/entity/bookInstance/'+ bookParam)
+    obtainedBook = res.json()
+    print(obtainedBook)
+    client.rentedBook = obtainedBook['id']
+    serializer = ClientSerializer(client)
+
+    return Response(serializer.data,status=status.HTTP_200_OK)
+

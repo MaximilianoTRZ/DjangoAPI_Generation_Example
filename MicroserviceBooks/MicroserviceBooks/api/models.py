@@ -11,7 +11,7 @@ class Author(models.Model):
         verbose_name = 'Author'
         verbose_name_plural = 'Authors'
         ordering = ['name']
-    
+      
     def __str__(self):
         return self.name
 
@@ -46,7 +46,8 @@ class BookInstance(models.Model):
         Maintenance = "Maintenance", _("Maintenance")
         Loaned = "Loaned", _("Loaned")
         Reserved = "Reserved", _("Reserved")
-    
+        
+    id = models.AutoField(primary_key=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=15,
