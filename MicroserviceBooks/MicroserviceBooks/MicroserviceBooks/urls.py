@@ -5,8 +5,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.routes.entityRoutes.entityRoutes import routerEntities
 from api.routes.v1Routes.v1Routes import routerV1
+from django.views.decorators.csrf import csrf_exempt
+# from rest_framework.permissions import IsAuthenticated
+
 
 class index(APIView):
+
     def get(self, request, format=None):
       return Response('',status=status.HTTP_200_OK)
 

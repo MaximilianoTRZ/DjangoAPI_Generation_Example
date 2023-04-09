@@ -3,8 +3,10 @@ from django.urls import path, include
 from rest_framework import  status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from api.routes.entityRoutes.entityRoutes import routerEntities
-from api.routes.v1Routes.v1Routes import routerV1
+
+# from api.routes.entityRoutes.entityRoutes import routerEntities
+# from api.routes.v1Routes.v1Routes import routerV1
+from api.routes.indexRoutes import routerEntities, routerV1
 
 class index(APIView):
     def get(self, request, format=None):
@@ -13,6 +15,7 @@ class index(APIView):
 class health(APIView):
     def get(self, request, format=None):
       return Response('ok',status=status.HTTP_200_OK)
+
 
 urlpatterns = [
   path('', index.as_view(), name='index'),

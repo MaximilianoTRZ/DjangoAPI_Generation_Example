@@ -2,7 +2,9 @@ from ..models.clientModel import Client
 from ..serializers.clientSerializer import ClientSerializer
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from MicroserviceClients.settings import env
 from requests.api import get
+
 
 
 class ClientViewSet(viewsets.ModelViewSet):
@@ -13,7 +15,7 @@ class ClientViewSet(viewsets.ModelViewSet):
 
     client = Client.objects.get(pk=pk)
     bookParam = client.rentedBook
-    res = get('http://127.0.0.1:8000/api/entity/bookInstance/'+ bookParam)
+    res = get(env("BOOKS_MICROSERVICE_URL")+'/api/entity/bookInstance/'+bookParam)
     obtainedBook = res.json()
     print(obtainedBook)
     client.rentedBook = obtainedBook['id']
